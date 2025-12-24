@@ -39,7 +39,7 @@ $total_price = 0;
     </style>
 </head>
 <body>
-    <?php session_start(); ?>
+    
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.php" class="logo">Gaming<span>Laptop</span></a>

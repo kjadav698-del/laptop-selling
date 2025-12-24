@@ -52,19 +52,33 @@ if (isset($_GET['order_id'])) {
         body {
             font-family: Arial, sans-serif;
             background-color: #eef2f5;
-            padding: 40px;
+            margin: 0;
+            min-height: 100vh;
+
+            /* Center everything */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
         }
 
         h1 {
             color: #2c3e50;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         form {
             background-color: #ffffff;
             padding: 25px;
             border-radius: 8px;
-            max-width: 400px;
+            max-width: 100%;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -102,27 +116,32 @@ if (isset($_GET['order_id'])) {
             color: #c0392b;
             padding: 10px;
             border-radius: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-<?php if (isset($message)) echo "<div class='message'>$message</div>"; ?>
+<div class="wrapper">
+    <?php if (isset($message)) : ?>
+        <div class="message"><?php echo $message; ?></div>
+    <?php endif; ?>
 
-<?php if (isset($order)): ?>
-    <h1>Update Order Status</h1>
-    <form action="" method="POST">
-        <label for="status">Order Status:</label>
-        <select name="status" id="status">
-            <option value="Pending" <?= $order['status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
-            <option value="Shipped" <?= $order['status'] == 'Shipped' ? 'selected' : '' ?>>Shipped</option>
-            <option value="Completed" <?= $order['status'] == 'Completed' ? 'selected' : '' ?>>Completed</option>
-            <option value="Cancelled" <?= $order['status'] == 'Cancelled' ? 'selected' : '' ?>>Cancelled</option>
-        </select>
-        <button type="submit">Update Status</button>
-    </form>
-<?php endif; ?>
+    <?php if (isset($order)) : ?>
+        <h1>Update Order Status</h1>
+        <form action="" method="POST">
+            <label for="status">Order Status:</label>
+            <select name="status" id="status">
+                <option value="Pending"   <?php echo ($order['status'] == 'Pending')   ? 'selected' : ''; ?>>Pending</option>
+                <option value="Shipped"   <?php echo ($order['status'] == 'Shipped')   ? 'selected' : ''; ?>>Shipped</option>
+                <option value="Completed" <?php echo ($order['status'] == 'Completed') ? 'selected' : ''; ?>>Completed</option>
+                <option value="Cancelled" <?php echo ($order['status'] == 'Cancelled') ? 'selected' : ''; ?>>Cancelled</option>
+            </select>
+            <button type="submit">Update Status</button>
+        </form>
+    <?php endif; ?>
+</div>
 
 </body>
 </html>
